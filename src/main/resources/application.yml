@@ -1,0 +1,43 @@
+server:
+  port: @server.port@
+#  servlet:
+#    context-path: /apis/professional
+spring:
+  application:
+    name: @project.artifactId@
+  datasource:
+    platform: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    filters: stat,wall
+    url: @db.url@
+    username: @db.username@
+    password: @db.password@
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+#  security:
+#    user:
+#      name: user
+#      password: 123456
+info:
+  app:
+    name: @project.artifactId@
+    description: @project.description@
+    version: @project.version@
+    encoding: @project.build.sourceEncoding@
+    base-package: @project.groupId@.@project.artifactId@
+    java:
+      version: @java.version@
