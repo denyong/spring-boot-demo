@@ -28,3 +28,5 @@
 /logs/
 /dockerfile/*.jar
 /.vscode/
+target/
+logs/
