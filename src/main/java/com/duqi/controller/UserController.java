@@ -6,7 +6,7 @@ import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
+import java.io.FileNotFoundException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,4 +55,14 @@ public class UserController {
     userService.delete(username);
     return ResponseEntity.ok().build();
   }
+
+
+
+  @PostMapping("/test")
+  public ResponseEntity<Void> test(@RequestParam("id") String id){
+    userService.test(id);
+    return ResponseEntity.ok().build();
+  }
+
+
 }

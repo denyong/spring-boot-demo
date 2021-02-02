@@ -4,7 +4,7 @@ import com.duqi.entity.User;
 import com.duqi.security.common.constants.SecurityConstants;
 import com.duqi.security.common.utils.CurrentUserUtils;
 import com.duqi.security.common.utils.JwtTokenUtils;
-import com.duqi.security.common.utils.JwtUser;
+import com.duqi.security.config.JwtUser;
 import com.duqi.security.model.LoginRequest;
 import com.duqi.service.UserService;
 import java.util.List;
