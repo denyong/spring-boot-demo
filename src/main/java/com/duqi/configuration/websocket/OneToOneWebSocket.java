@@ -1,6 +1,5 @@
 package com.duqi.configuration.websocket;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

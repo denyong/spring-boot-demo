@@ -16,8 +16,6 @@ import com.duqi.security.model.request.UserRegisterRequest;
 import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import com.google.common.collect.ImmutableMap;
-import java.io.FileNotFoundException;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -59,11 +59,13 @@ public class UserServiceImpl implements UserService {
 
     userRoleRepository.save(new UserRole(user, studentRole));
     userRoleRepository.save(new UserRole(user, managerRole));
+    // ；；；；
     return saveUser;
   }
 
   @Override
   public void delete(String username) {
+
     if (!userRepository.existsByUsername(username)) {
       throw new UserNameNotFoundException(ImmutableMap.of("username", username));
     }
@@ -113,7 +115,7 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of("username", username)));
   }
 
-  @Transactional// (rollbackFor=Exception.class)
+//  @Transactional// (rollbackFor=Exception.class)
   public void test(String id) {
     User user = new User();
     user.setEnabled(false);
@@ -125,9 +127,16 @@ public class UserServiceImpl implements UserService {
     objects.add(new UserRole());
     user.setUserRoles(objects);
     userRepository.save(user);
-//    int i = 1 / 0 ;
+    test1(id);
+    int i = 1 / 0 ;
     if (true){
       TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
     }
+  }
+  @Autowired
+  UUTest uuTest;
+  @Transactional(propagation= Propagation.REQUIRED)
+  public void test1(String id) {
+    uuTest.test123(id);
   }
 }

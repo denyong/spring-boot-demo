@@ -60,9 +60,9 @@ public class UserController {
 
   @PostMapping("/test")
   public ResponseEntity<Void> test(@RequestParam("id") String id){
-    userService.test(id);
+//    userService.test(id);
+    userService.test1(id);
+
     return ResponseEntity.ok().build();
   }
-
-
 }

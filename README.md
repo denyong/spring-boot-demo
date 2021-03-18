@@ -1,8 +1,12 @@
-<center>诶嘿</center>
-#  spring-boot-demo
-SpringBoot+Redis+Spring Security+JWT实现用户认证，权限认证
+# 1.项目搭建
 
-`
-启动顺序
-redis
-`
+| 组件            | 版本   | 说明       |
+| :-------------- | ------ | :--------- |
+| SpringBoot      | 2.1.0  | 后端框架   |
+| Spring Security | 2.1.0  | 认证框架   |
+| JWT             | 0.10.6 | Token相关  |
+| Redis           | 3.2.1  | 缓存相关   |
+| MYSQL           | 8.0.1  | 数据库相关 |
+
+
+

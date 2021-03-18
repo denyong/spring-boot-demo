@@ -4,7 +4,6 @@ import com.duqi.entity.User;
 import com.duqi.security.model.representation.UserRepresentation;
 import com.duqi.security.model.request.UserRegisterRequest;
 import com.duqi.security.model.request.UserUpdateRequest;
-import java.io.FileNotFoundException;
 import org.springframework.data.domain.Page;
 
 public interface UserService {
@@ -31,4 +30,6 @@ public interface UserService {
   User find(String userName);
 
   void test(String id);
+
+  void test1(String id);
 }

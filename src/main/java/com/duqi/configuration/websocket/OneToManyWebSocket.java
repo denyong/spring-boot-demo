@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Auther: dengyong
  * @Date: 2021/02/02/22:16
- * @Description: 前后端交互的类实现消息的接收推送(自己发送给所有人 ( 不包括自己))
+ * @Description: 前后端交互的类实现消息的接收推送(自己发送给所有人,不包括自己)
  */
 @Slf4j
 @ServerEndpoint(value = "/test/oneToMany")

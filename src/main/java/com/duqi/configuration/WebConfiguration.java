@@ -3,24 +3,18 @@ package com.duqi.configuration;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -94,14 +88,16 @@ public class WebConfiguration implements WebMvcConfigurer {
   //            Controller.class));
   //  }
 
-  //  @Override
-  //  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-  //    registry.addResourceHandler("/**")
-  //        .addResourceLocations("classpath:/META-INF/resources/")
-  //        .addResourceLocations("classpath:/META-INF/resources/image/")
-  //        .addResourceLocations("classpath:/resources/")
-  //        .addResourceLocations("classpath:/resources/upload/")
-  //        .addResourceLocations("classpath:/upload/");
-  //  }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+      registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
 }
+
+
+
+
+
+
+
 
