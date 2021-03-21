@@ -3,6 +3,7 @@ package com.duqi.aop;
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -14,6 +15,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Configuration
 public class AuthenticationTicketAop {
+
+  ThreadLocal<Long> startTime = new ThreadLocal<>();
+
 
   @Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
   public void controllerGetMappingPointcut() {
@@ -34,6 +38,7 @@ public class AuthenticationTicketAop {
   @Before("controllerGetMappingPointcut()")
   public void getAuthenticationTicketFormGetMapping(JoinPoint joinPoint)
       throws AuthenticationException {
+    startTime.set(System.currentTimeMillis());
     RequestAttributes ra = RequestContextHolder.getRequestAttributes();
     ServletRequestAttributes sra = (ServletRequestAttributes) ra;
     HttpServletRequest request = sra.getRequest();
@@ -49,6 +54,7 @@ public class AuthenticationTicketAop {
   @Before("controllerPostMappingPointcut()")
   public void getAuthenticationTicketFormPostMapping(JoinPoint joinPoint)
       throws AuthenticationException {
+    startTime.set(System.currentTimeMillis());
     RequestAttributes ra = RequestContextHolder.getRequestAttributes();
     ServletRequestAttributes sra = (ServletRequestAttributes) ra;
     HttpServletRequest request = sra.getRequest();
@@ -89,5 +95,9 @@ public class AuthenticationTicketAop {
 //      throw new AuthenticationException();
 //    }
     AuthenticationTicket.setTicket(new AuthenticationTicket(pin));
+  }
+  @After("controllerPostMappingPointcut()")
+  public void doAfter(){
+    System.out.println(System.currentTimeMillis()-startTime.get());
   }
 }

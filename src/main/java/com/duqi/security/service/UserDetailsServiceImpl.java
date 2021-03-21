@@ -1,7 +1,7 @@
 package com.duqi.security.service;
 
 
-import com.duqi.security.common.utils.JwtUser;
+import com.duqi.security.config.JwtUser;
 import com.duqi.entity.User;
 import com.duqi.repository.UserRepository;
 import java.util.Optional;
