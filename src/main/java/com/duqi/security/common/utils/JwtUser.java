@@ -1,4 +1,4 @@
-package com.duqi.security.config;
+package com.duqi.security.common.utils;
 
 import com.duqi.entity.User;
 import java.util.Collection;

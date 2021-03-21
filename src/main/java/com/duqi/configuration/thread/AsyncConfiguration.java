@@ -1,4 +1,4 @@
-package com.duqi.configuration;
+package com.duqi.configuration.thread;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;

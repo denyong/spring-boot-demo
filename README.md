@@ -10,3 +10,7 @@
 
 
 
+SpringBoot整合kafka 一定要在kafka/config/server.properties文件中开启
+`listeners=PLAINTEXT://:9092
+advertised.listeners=PLAINTEXT://192.168.169.20:9092
+`

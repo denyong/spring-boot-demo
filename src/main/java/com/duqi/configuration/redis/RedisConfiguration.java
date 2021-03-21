@@ -1,4 +1,4 @@
-package com.duqi.configuration;
+package com.duqi.configuration.redis;
 
 import java.time.Duration;
 
