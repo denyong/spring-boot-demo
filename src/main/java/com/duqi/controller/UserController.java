@@ -1,5 +1,7 @@
 package com.duqi.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.duqi.entity.User;
 import com.duqi.security.model.representation.UserRepresentation;
 import com.duqi.security.model.request.UserUpdateRequest;
@@ -8,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.FileNotFoundException;
 import javax.validation.Valid;
+import okhttp3.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @Api(tags = "用户控制层")
 //@Scope("prototype") //开启多例模式
@@ -28,6 +32,7 @@ public class UserController {
   @Autowired
   UserService userService;
   private static int num = 1;
+
   @GetMapping("/getAllUsers")
   @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
   @ApiOperation("获取所有用户的信息（分页）")
@@ -59,10 +64,23 @@ public class UserController {
 
 
   @PostMapping("/test")
-  public ResponseEntity<Void> test(@RequestParam("id") String id){
+  public ResponseEntity<Void> test(@RequestParam("id") String id) {
 //    userService.test(id);
     userService.test1(id);
-
     return ResponseEntity.ok().build();
   }
+
+
+  @GetMapping("/okhttp1")
+  public String okHttp1() {
+    return "123";
+  }
+
+  @PostMapping("/okhttp2")
+  public String okHttp2(@RequestBody JSONObject jsonObject) {
+    System.out.println(jsonObject.getString("a"));
+    return "465";
+  }
+
+
 }
