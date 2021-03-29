@@ -1,6 +1,5 @@
 package com.duqi.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.duqi.entity.User;
 import com.duqi.security.model.representation.UserRepresentation;
@@ -10,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.FileNotFoundException;
 import javax.validation.Valid;
-import okhttp3.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

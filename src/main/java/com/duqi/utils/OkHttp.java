@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,7 +26,7 @@ public class OkHttp {
   public void post() {
     OkHttpClient okHttpClient = new OkHttpClient();
     RequestBody requestBody = RequestBody.create(json, mediaType);
-    Request request = new Request.Builder().url(url).post(requestBody)
+    Request request = new Request.Builder().addHeader("name","value").url(url).post(requestBody)
         .build();
     try {
       // 使用client去请求
