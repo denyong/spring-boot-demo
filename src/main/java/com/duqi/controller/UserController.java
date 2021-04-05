@@ -81,4 +81,14 @@ public class UserController {
   }
 
 
+
+  @PostMapping("/post")
+  public String uyhsfg(@RequestBody JSONObject jsonObject) {
+    JSONObject data = jsonObject.getJSONObject("data");
+
+
+    return "465";
+  }
+
+
 }
