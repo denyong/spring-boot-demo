@@ -7,7 +7,6 @@ import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.io.FileNotFoundException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,12 +58,8 @@ public class UserController {
     return ResponseEntity.ok().build();
   }
 
-
-
   @PostMapping("/test")
   public ResponseEntity<Void> test(@RequestParam("id") String id) {
-//    userService.test(id);
-    userService.test1(id);
     return ResponseEntity.ok().build();
   }
 

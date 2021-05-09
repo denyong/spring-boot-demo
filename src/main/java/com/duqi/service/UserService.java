@@ -28,8 +28,4 @@ public interface UserService {
 
   // 查询当前请求用户
   User find(String userName);
-
-  void test(String id);
-
-  void test1(String id);
 }

@@ -16,7 +16,6 @@ import com.duqi.security.model.request.UserRegisterRequest;
 import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import com.google.common.collect.ImmutableMap;
-import java.util.ArrayList;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,11 +23,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -113,30 +109,5 @@ public class UserServiceImpl implements UserService {
   public User find(String username) {
     return userRepository.findByUsername(username)
         .orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of("username", username)));
-  }
-
-//  @Transactional// (rollbackFor=Exception.class)
-  public void test(String id) {
-    User user = new User();
-    user.setEnabled(false);
-    user.setPassword("rqwerf");
-    user.setFullName("fgfdg");
-    user.setUsername("ddfgsdfg");
-    user.setId(7);
-    ArrayList<UserRole> objects = new ArrayList<>();
-    objects.add(new UserRole());
-    user.setUserRoles(objects);
-    userRepository.save(user);
-    test1(id);
-    int i = 1 / 0 ;
-    if (true){
-      TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-    }
-  }
-  @Autowired
-  UUTest uuTest;
-  @Transactional(propagation= Propagation.REQUIRED)
-  public void test1(String id) {
-    uuTest.test123(id);
   }
 }
