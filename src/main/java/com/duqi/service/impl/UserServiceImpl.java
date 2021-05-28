@@ -17,7 +17,7 @@ import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import com.google.common.collect.ImmutableMap;
 import java.util.Objects;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,21 +26,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author dengyong
+ */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+  private final UserRepository userRepository;
 
-  @Autowired
-  UserRepository userRepository;
+  private final RoleRepository roleRepository;
 
-  @Autowired
-  RoleRepository roleRepository;
+  private final UserRoleRepository userRoleRepository;
 
-  @Autowired
-  UserRoleRepository userRoleRepository;
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+  @Override
   @Transactional(isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
   public User save(UserRegisterRequest userRegisterRequest) throws RuntimeException {
     ensureUserNameNotExist(userRegisterRequest.getUsername());
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
   public User update(UserUpdateRequest userUpdateRequest) {
     User user = findByUsername(userUpdateRequest.getUsername());
     if (Objects.nonNull(user)) {
-      user.builder().fullName(userUpdateRequest.getFullName())
+      User.builder().fullName(userUpdateRequest.getFullName())
           .enabled(userUpdateRequest.getEnabled());
       return userRepository.save(user);
     }
@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
   }
 
   // 校验密码
+  @Override
   public boolean check(String currentPassword, String password) {
     return this.bCryptPasswordEncoder.matches(currentPassword, password);
   }

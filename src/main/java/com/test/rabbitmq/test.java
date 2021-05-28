@@ -2,11 +2,19 @@ package com.test.rabbitmq;
 
 import static com.alibaba.fastjson.JSON.parseObject;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
+import org.apache.commons.beanutils.ConvertUtils;
 
 /**
  * @author : dengyong
@@ -16,21 +24,14 @@ import org.springframework.web.client.RestTemplate;
 public class test {
 
   public static void main(String[] args) {
+    String url = "http://localhost/test";
     RestTemplate restTemplate = new RestTemplate();
-    JSONObject childJson = new JSONObject();
-    childJson.put("corp_full_name", "DHL空运服务（上海）有限公司");
-    JSONObject json = new JSONObject();
-    json.put("masterTableName", "organization");
-    json.put("paramMap", childJson);
     HttpHeaders headers = new HttpHeaders();
-    headers.set("Content-Type", "application/json");
-    String body = restTemplate
-        .exchange("http://121.4.227.149:20000/maindata/exportMasterData/searchMasterDataForAPI", HttpMethod.POST, new HttpEntity<>(json, headers), JSONObject.class).getBody()
-        .toJSONString();
-    // 若存在客户相关信息，则说明经过工商认证
-    boolean isGongShangCheck = (body != null && parseObject(body).getJSONObject("data")
-        .getJSONArray("data").size() > 0);
-    // 1. 获取客户信息
-    System.out.println(isGongShangCheck);
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    ResponseEntity<JSONObject> entity = restTemplate.getForEntity(url,JSONObject.class);
+    JSONObject forObject = restTemplate.getForObject(url, JSONObject.class);
+    System.out.println(entity);
+    System.out.println(forObject);
+    System.out.println(123);
   }
 }

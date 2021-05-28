@@ -8,7 +8,7 @@ import com.duqi.service.UserService;
 import com.duqi.utils.BackBean;
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequiredArgsConstructor
 public class AuthController {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
-  @Autowired
-  AuthService authService;
+  private final AuthService authService;
 
   @PostMapping("/auth/login")
   @ApiOperation("用户登录")

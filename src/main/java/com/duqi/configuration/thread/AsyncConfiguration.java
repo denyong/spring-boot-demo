@@ -1,5 +1,7 @@
 package com.duqi.configuration.thread;
 
+import com.alibaba.fastjson.JSONObject;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.context.annotation.Bean;
@@ -36,5 +38,11 @@ public class AsyncConfiguration {
     // 线程池初始化
     executor.initialize();
     return executor;
+  }
+
+  public static void main(String[] args) {
+    JSONObject jsonObject = null;
+    System.out.println(!Optional.ofNullable(jsonObject).isPresent());
+    System.out.println(!Optional.ofNullable(null).isPresent());
   }
 }

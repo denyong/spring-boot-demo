@@ -8,7 +8,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.crypto.SecretKey;
 import javax.xml.bind.DatatypeConverter;
@@ -29,6 +31,8 @@ public class JwtTokenUtils {
   // 创建token
   public static String createToken(String username, String id, List<String> roles,
       boolean isRememberMe) {
+    Map map = new HashMap();
+    map.put("openId","aaaa");
     long expiration =
         isRememberMe ? SecurityConstants.EXPIRATION_REMEMBER : SecurityConstants.EXPIRATION;
     return Jwts.builder()
