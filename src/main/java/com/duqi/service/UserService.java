@@ -4,7 +4,6 @@ import com.duqi.entity.User;
 import com.duqi.security.model.representation.UserRepresentation;
 import com.duqi.security.model.request.UserRegisterRequest;
 import com.duqi.security.model.request.UserUpdateRequest;
-import java.util.List;
 import org.springframework.data.domain.Page;
 
 public interface UserService {

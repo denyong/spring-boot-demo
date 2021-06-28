@@ -43,6 +43,7 @@ public class AuthService {
     String token = JwtTokenUtils
         .createToken(user.getUsername(), user.id.toString(), authorities,
             loginRequest.getRememberMe());
+
     long expiration =
         loginRequest.getRememberMe() ? SecurityConstants.EXPIRATION_REMEMBER
             : SecurityConstants.EXPIRATION;

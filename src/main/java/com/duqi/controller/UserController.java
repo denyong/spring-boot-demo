@@ -1,12 +1,12 @@
 package com.duqi.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.duqi.entity.User;
 import com.duqi.security.model.representation.UserRepresentation;
 import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @Api(tags = "用户控制层")
@@ -27,6 +29,7 @@ public class UserController {
   @Autowired
   UserService userService;
   private static int num = 1;
+
   @GetMapping("/getAllUsers")
   @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_MANAGER','ROLE_ADMIN')")
   @ApiOperation("获取所有用户的信息（分页）")
@@ -54,4 +57,33 @@ public class UserController {
     userService.delete(username);
     return ResponseEntity.ok().build();
   }
+
+  @PostMapping("/test")
+  public ResponseEntity<Void> test(@RequestParam("id") String id) {
+    return ResponseEntity.ok().build();
+  }
+
+
+  @GetMapping("/okhttp1")
+  public String okHttp1() {
+    return "123";
+  }
+
+  @PostMapping("/okhttp2")
+  public String okHttp2(@RequestBody JSONObject jsonObject) {
+    System.out.println(jsonObject.getString("a"));
+    return "465";
+  }
+
+
+
+  @PostMapping("/post")
+  public String uyhsfg(@RequestBody JSONObject jsonObject) {
+    JSONObject data = jsonObject.getJSONObject("data");
+
+
+    return "465";
+  }
+
+
 }

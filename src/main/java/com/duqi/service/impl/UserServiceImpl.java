@@ -17,7 +17,7 @@ import com.duqi.security.model.request.UserUpdateRequest;
 import com.duqi.service.UserService;
 import com.google.common.collect.ImmutableMap;
 import java.util.Objects;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,22 +26,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author dengyong
+ */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+  private final UserRepository userRepository;
 
-  @Autowired
-  UserRepository userRepository;
+  private final RoleRepository roleRepository;
 
-  @Autowired
-  RoleRepository roleRepository;
+  private final UserRoleRepository userRoleRepository;
 
-  @Autowired
-  UserRoleRepository userRoleRepository;
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-  @Transactional(isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
+  @Override
+  @Transactional(isolation = Isolation.DEFAULT, rollbackFor = Exception.class)
   public User save(UserRegisterRequest userRegisterRequest) throws RuntimeException {
     ensureUserNameNotExist(userRegisterRequest.getUsername());
     User user = userRegisterRequest.toUser();
@@ -55,11 +55,13 @@ public class UserServiceImpl implements UserService {
 
     userRoleRepository.save(new UserRole(user, studentRole));
     userRoleRepository.save(new UserRole(user, managerRole));
+    // ；；；；
     return saveUser;
   }
 
   @Override
   public void delete(String username) {
+
     if (!userRepository.existsByUsername(username)) {
       throw new UserNameNotFoundException(ImmutableMap.of("username", username));
     }
@@ -69,8 +71,9 @@ public class UserServiceImpl implements UserService {
   @Override
   public User update(UserUpdateRequest userUpdateRequest) {
     User user = findByUsername(userUpdateRequest.getUsername());
-    if (Objects.nonNull(user)){
-      user.builder().fullName(userUpdateRequest.getFullName()).enabled(userUpdateRequest.getEnabled());
+    if (Objects.nonNull(user)) {
+      User.builder().fullName(userUpdateRequest.getFullName())
+          .enabled(userUpdateRequest.getEnabled());
       return userRepository.save(user);
     }
     return null;
@@ -78,10 +81,12 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Page<UserRepresentation> getAll(int pageNum, int pageSize) {
-    return userRepository.findAll(PageRequest.of(pageNum, pageSize)).map(User::toUserRepresentation);
+    return userRepository.findAll(PageRequest.of(pageNum, pageSize))
+        .map(User::toUserRepresentation);
   }
 
   // 校验密码
+  @Override
   public boolean check(String currentPassword, String password) {
     return this.bCryptPasswordEncoder.matches(currentPassword, password);
   }
@@ -103,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
   // 查询当前请求用户
   public User find(String username) {
-    return userRepository.findByUsername(username).orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of("username", username)));
-
+    return userRepository.findByUsername(username)
+        .orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of("username", username)));
   }
 }
