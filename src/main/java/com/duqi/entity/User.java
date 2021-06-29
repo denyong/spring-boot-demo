@@ -22,6 +22,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+/**
+ * @author dengyong
+ */
 @Getter
 @Setter
 @Builder

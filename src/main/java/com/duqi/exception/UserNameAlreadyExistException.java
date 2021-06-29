@@ -3,6 +3,9 @@ package com.duqi.exception;
 import java.util.Map;
 
 
+/**
+ * @author dengyong
+ */
 public class UserNameAlreadyExistException extends BaseException {
 
   public UserNameAlreadyExistException(Map<String, Object> data) {

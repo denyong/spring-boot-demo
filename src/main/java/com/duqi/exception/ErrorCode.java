@@ -3,8 +3,13 @@ package com.duqi.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * @author dengyong
+ */
+
 @Getter
 public enum ErrorCode {
+
   USER_NAME_ALREADY_EXIST(1001, HttpStatus.BAD_REQUEST, "用户名已经存在"),
   Role_NOT_FOUND(1002, HttpStatus.NOT_FOUND, "未找到指定角色"),
   USER_NAME_NOT_FOUND(1002, HttpStatus.NOT_FOUND, "未找到指定用户"),

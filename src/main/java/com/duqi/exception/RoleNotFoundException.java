@@ -2,6 +2,9 @@ package com.duqi.exception;
 
 import java.util.Map;
 
+/**
+ * @author dengyong
+ */
 public class RoleNotFoundException extends BaseException {
 
   public RoleNotFoundException(Map<String, Object> data) {

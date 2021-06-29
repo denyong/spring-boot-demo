@@ -3,6 +3,9 @@ package com.duqi.aop;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * @author dengyong
+ */
 public class AuthenticationTicket {
 
   private static final ThreadLocal<AuthenticationTicket> holder = new ThreadLocal();

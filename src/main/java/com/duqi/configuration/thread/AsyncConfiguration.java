@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
+ * @author dengyong
  * @Auther: dengyong
  * @Date: 2021/02/02/9:57
  * @Description:
@@ -38,11 +39,5 @@ public class AsyncConfiguration {
     // 线程池初始化
     executor.initialize();
     return executor;
-  }
-
-  public static void main(String[] args) {
-    JSONObject jsonObject = null;
-    System.out.println(!Optional.ofNullable(jsonObject).isPresent());
-    System.out.println(!Optional.ofNullable(null).isPresent());
   }
 }

@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.util.ObjectUtils;
 
+/**
+ * @author dengyong
+ */
 @Getter
 @ToString
 @NoArgsConstructor
