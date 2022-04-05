@@ -1,6 +1,5 @@
 package com.duqi.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -27,19 +26,15 @@ public abstract class AbstractAuditBase {
 
   @CreatedDate
   @Column(updatable = false)
-  @JsonIgnore
   private Instant createdAt;
 
   @LastModifiedDate
-  @JsonIgnore
   private Instant updatedAt;
 
   @CreatedBy
   @Column(updatable = false)
-  @JsonIgnore
   private String createdBy;
 
   @LastModifiedBy
-  @JsonIgnore
   private String updatedBy;
 }

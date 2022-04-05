@@ -1,7 +1,6 @@
 package com.duqi.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -28,7 +27,6 @@ public class Role extends AbstractAuditBase {
   public String description;
 
   @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-  @JsonIgnore
   public List<UserRole> userRoles = new ArrayList<>();
 
   public Role(String name, String description) {

@@ -1,7 +1,5 @@
 package com.duqi.configuration.thread;
 
-import com.alibaba.fastjson.JSONObject;
-import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +9,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * @author dengyong
- * @Auther: dengyong
+ * @Auther: deng yong
  * @Date: 2021/02/02/9:57
  * @Description:
  */

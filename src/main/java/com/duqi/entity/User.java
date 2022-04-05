@@ -1,7 +1,6 @@
 package com.duqi.entity;
 
-import com.duqi.security.model.representation.UserRepresentation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 /**
  * @author dengyong
@@ -48,18 +46,6 @@ public class User extends AbstractAuditBase {
   public Boolean enabled; // 用户是否被删除/可见
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  @JsonIgnore
   private List<UserRole> userRoles = new ArrayList<>();
 
-  public List<SimpleGrantedAuthority> getRoles() {
-    List<Role> roles = userRoles.stream().map(UserRole::getRole).collect(Collectors.toList());
-    List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    roles.forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
-    return authorities;
-  }
-
-  public UserRepresentation toUserRepresentation() {
-    return UserRepresentation.builder().fullName(this.fullName)
-        .username(this.username).build();
-  }
 }
