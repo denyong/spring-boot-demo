@@ -69,4 +69,5 @@ info:
     base-package: @project.groupId@.@project.artifactId@
     java:
       version: @java.version@
-
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
